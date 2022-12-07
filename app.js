@@ -2,6 +2,7 @@ import express from 'express';
 import path from 'path';
 import mysql from 'mysql';
 import request from 'request';
+import bodyParser from 'body-parser';
 
 //import dbconfig from './build/db.js'
 
@@ -23,6 +24,9 @@ const connection = mysql.createConnection(dbconfig);
 //console.log(path);
 const app = express();
 app.set('port', process.env.PORT || 3000);
+
+app.use(express.json())
+app.use(bodyParser.urlencoded({extended:false}))
 
 const __dirname = path.resolve();
 
@@ -80,7 +84,20 @@ app.get('/boardHead', (req, res) => {
 
 app.get('/signInPage', (req, res) => {
   res.sendFile(path.join(__dirname, '/public/views/signInPage/signInPage.html'));
+  // const param = [req.body.USER_NAME, req.body.USER_PASS, req.body.USER_EMAIL]
+  // connection.query('INSERT INTO user_(`USER_NAME`, `USER_PASS`, `USER_EMAIL`)VALUES (?,?,?)'), param, (err, row) =>{
+  //   if(err) console.log(err);
+  // }
 });
+
+app.post('/signInPage', (req, res)=>{
+  const param = [req.body.USER_NAME, req.body.USER_PASS, req.body.USER_EMAIL]
+  connection.query('INSERT INTO user_(`USER_NAME`, `USER_PASS`, `USER_EMAIL`)VALUES (?,?,?)'), param, (err, row) =>{
+    if(err) console.log(err);
+  }
+  
+  res.send();
+})
 
 app.get('/slider', (req, res) => {
   res.sendFile(path.join(__dirname, '/public/views/slider/moveSlide.html'));

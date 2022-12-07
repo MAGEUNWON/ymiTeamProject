@@ -2,7 +2,8 @@ const app = document.getElementById("app");
 
 function formMaker(){
   const form = document.createElement("form");
-  form.setAttribute("action", "post");
+  form.setAttribute("action", "/signInPage")
+  form.setAttribute("method", "post");
   form.setAttribute("id", "form");
   form.setAttribute("onsubmit", "return false");
   app.appendChild(form);
@@ -72,6 +73,8 @@ function formMaker(){
   const signInButton = document.createElement("button");
   signInButtonDiv.appendChild(signInButton);
   signInButton.textContent = "가입하기";
+  signInButton.setAttribute("type", "submit");
+  signInButton.setAttribute("id", "signInbutton");
   // app > form > div:nth-child(6) >  button
 
   const span = document.createElement("span");

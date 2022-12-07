@@ -8,7 +8,7 @@
 const dbconfig = {
   host: 'localhost',
   user: 'root',
-  passsword: '1234',
+  passsword: 'root',
   port: '3306',
   database: 'inthem'
 }
